@@ -6,7 +6,8 @@
 .calculator {
     display: grid;
     grid-template-rows: auto 1fr;
-    width: 320px;
+    width: 400px;
+    min-height: 510px;
     margin: 0 auto;
     border-bottom: #161515 solid 5px;
     border-right: #161515 solid 5px;
@@ -17,20 +18,74 @@
     color: #F1D9BD;
 }
 
-p {
-    font-size: 18px;
-    margin: 0;
-    padding: 0;
+.calculator-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+
+.brand {
+    font-family: "Press Start 2P", system-ui;
+    font-size: 25px;
     color: #F1D9BD;
 }
 
+.brand-info-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.info-block {
+    font-family: "Press Start 2P", sans-serif;
+    color: #F1D9BD;
+    line-height: 1.2;
+}
+
+.info-digits {
+    font-size: 8px;
+    margin: 0;
+    opacity: 0.8;
+}
+
+.info-subtitle {
+    font-size: 7px;
+    margin: 0;
+    opacity: 0.9;
+}
+
+.info-divider {
+    border: none;
+    height: 1px;
+    background-color: #F1D9BD;
+    width: 100%;
+    margin: 3px auto;
+    opacity: 0.5;
+}
+
+.solar-panel {
+    width: 90px;
+    height: 30px;
+    border: 2px solid #111;
+    border-radius: 4px;
+    background-color: #6C4838;
+    background-image: repeating-linear-gradient(
+        to right,
+        #825848 0, #825848 2px,
+        transparent 2px, transparent 25%
+    );
+}
+
+
 input {
     width: 100%;
-    height: 50px;
-    font-size: 32px;
+    height: 65px;
+    font-size: 40px;
     text-align: right;
     padding: 10px;
-    margin: 15px 0;
+    margin: 5px 0 15px 0;
     border-radius: 5px;
     box-sizing: border-box;
     background-color: #82957A;
@@ -46,7 +101,7 @@ input {
 }
 
 .btn {
-    min-height: 70px;
+    aspect-ratio: 1 / 1;
     font-size: 24px;
     cursor: pointer;
     border-radius: 8px;
@@ -108,4 +163,21 @@ input {
 
 #zero-btn {
     grid-column: span 3;
+    aspect-ratio: auto;
+}
+
+#decimal-btn {
+    background-color: #F1D9BD;
+    color: #ED6F40;
+    font-family: "Press Start 2P", system-ui;
+    border-bottom: 5px solid #d8c3aa;
+}
+
+#decimal-btn:hover {
+    background-color: #f3e0ca;
+}
+
+#decimal-btn:active {
+    transform: translateY(2px);
+    border-bottom: 3px solid #d8c3aa;
 }

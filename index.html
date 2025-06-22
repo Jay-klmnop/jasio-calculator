@@ -12,7 +12,17 @@
     </head>
     <body>
         <div class="calculator">
-            <p>JASIO</p>
+            <div class="calculator-header">
+                <div class="brand-info-wrapper">
+                    <div class="brand">JASIO</div>
+                    <div class="info-block">
+                        <p class="info-digits">16-Digit</p>
+                        <hr class="info-divider">
+                        <p class="info-subtitle">JavaScript Calculator</p>
+                    </div>
+                </div>
+                <div class="solar-panel"></div>
+                </div>
             <input type="text" id="display" disabled>
             <div class="buttons">
                 <button class="btn clear" id="clear-btn">C</button>
@@ -26,7 +36,7 @@
                         <rect x="3" y="6" width="1" height="1"/>
                     </svg>
                 </button>
-                <button class="btn operator">.</button>
+                <button class="btn number" id="decimal-btn">.</button>
                 <button class="btn operator">/</button>
                 <button class="btn number">7</button>
                 <button class="btn number">8</button>

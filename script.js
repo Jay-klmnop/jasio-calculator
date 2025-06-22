@@ -28,10 +28,14 @@ function operate(first, operator, second) {
 
 document.querySelectorAll('.number').forEach(button => {
     button.addEventListener('click', () => {
+        if (button.textContent === '.' && display.value.includes('.')) {
+            return; 
+        }
         if (isWaitingForSecondValue) {
             display.value = button.textContent;
             isWaitingForSecondValue = false;
         } else {
+            if (display.value.length >= 16) return;
             display.value = display.value === '0' ? button.textContent : display.value + button.textContent;
         }
     });
@@ -53,18 +57,8 @@ document.querySelectorAll('.operator').forEach(button => {
 });
 
 equalsButton.addEventListener('click', () => {
-    console.log('= 버튼 클릭됨!');
-     const secondValue = display.value; // secondValue를 여기서 선언
-
-    // 계산 직전에 모든 재료를 출력해보자
-    console.log('첫 번째 값 (firstValue):', firstValue);
-    console.log('연산자 (operator):', operator);
-    console.log('두 번째 값 (secondValue):', secondValue);
-    
-    if (!firstValue || !operator) {
-        console.log('계산에 필요한 값이 부족하여 중단합니다.');
-        return;
-    }
+    if (!firstValue || !operator) return;
+    const secondValue = display.value;
     const result = operate(firstValue, operator, secondValue);
     display.value = result;
     firstValue = result;
