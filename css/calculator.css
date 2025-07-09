@@ -1,0 +1,17 @@
+.calculator {
+    display: grid;
+    grid-template-rows: auto 1fr 5fr;
+    width: 100%;
+    max-width: 500px;
+    height: 80vh;
+    margin: 0 auto;
+    border-bottom: #161515 solid 5px;
+    border-right: #161515 solid 5px;
+    border-radius: 8px;
+    font-family: "Press Start 2P", system-ui;
+    padding: 20px;
+    background-color: #201E1F;
+    color: #F1D9BD;
+    padding: clamp(15px, 3vw, 25px);
+    gap: clamp(10px, 2vw, 20px);
+}

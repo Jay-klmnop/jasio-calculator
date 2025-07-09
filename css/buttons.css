@@ -1,0 +1,98 @@
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: clamp(10px, 2vw, 20px);
+    height: 100%;
+}
+
+.btn {
+    font-size: clamp(1.5rem, 3vw, 1.8rem);
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+    border-bottom: 5px solid #272626;
+    background-color: #2C2B2B;
+    color: #ED6F40;
+    transition: all 0.1s ease-in-out;
+    font-family: "Press Start 2P", system-ui;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5px;
+    box-sizing: border-box;
+}
+
+.btn:hover {
+    background-color: #414040;
+}
+
+.btn:active {
+    transform: translateY(2px);
+    border-bottom: 3px solid #272626;
+}
+
+.btn.operator {
+    background-color: #F1D9BD;
+    color: #ED6F40;
+    font-family: "Press Start 2P", system-ui;
+    border-bottom: 5px solid #d8c3aa;
+}
+
+.btn.operator:hover {
+    background-color: #f3e0ca;
+}
+
+.btn.operator:active {
+    transform: translateY(2px);
+    border-bottom: 3px solid #d8c3aa;
+}
+
+.btn.clear {
+    background-color: #ED6F40;
+    color: #F1D9BD;
+    font-family: "Press Start 2P", system-ui;
+    border-bottom: 5px solid #d56339;
+}
+
+.btn.clear:hover {
+    background-color: #ee7d53;
+}
+
+.btn.clear:active {
+    transform: translateY(2px);
+    border-bottom: 3px solid #d56339;
+}
+
+.backspace-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    fill: currentColor;
+    transform: translate(1.5px, 2px);
+}
+
+#zero-btn {
+    grid-column: span 3;
+    grid-row: 5;
+}
+
+#equals-btn {
+    grid-column: 4;
+    grid-row: 5;
+}
+
+#decimal-btn {
+    background-color: #F1D9BD;
+    color: #ED6F40;
+    font-family: "Press Start 2P", system-ui;
+    border-bottom: 5px solid #d8c3aa;
+}
+
+#decimal-btn:hover {
+    background-color: #f3e0ca;
+}
+
+#decimal-btn:active {
+    transform: translateY(2px);
+    border-bottom: 3px solid #d8c3aa;
+}
