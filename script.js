@@ -20,27 +20,21 @@ calculatorButtons.addEventListener('click', (event) => {
     }
     if (target.classList.contains('number')) {
         const digit = target.textContent;
+        if (calculator.isWaitingForSecondValue === true) {
+        calculator.displayValue = digit === '.' ? '0.' : digit;
+        calculator.isWaitingForSecondValue = false;
+    } else {
         if (digit === '.') {
             if (!calculator.displayValue.includes('.')) {
                 calculator.displayValue += '.';
-            } else {
-                if (calculator.displayValue === '0') {
-                    calculator.displayValue = digit;
-                } else {
-                    calculator.displayValue += digit;
-                }
             }
-            updateDisplay();
-            return;
-        }
-        if (calculator.isWaitingForSecondValue) {
-            calculator.displayValue = digit;
-            calculator.isWaitingForSecondValue = false;
         } else {
-            if (calculator.displayValue.length >= 16) return;
-            calculator.displayValue = calculator.displayValue === '0' ? digit : calculator.displayValue + digit;
+            if (calculator.displayValue.length < 16) {
+                calculator.displayValue = calculator.displayValue === '0' ? digit : calculator.displayValue + digit;
+            }
         }
     }
+}
     if (target.classList.contains('operator')) {
         const { displayValue, firstValue, operator } = calculator;
         if (firstValue && operator && !calculator.isWaitingForSecondValue) {
@@ -70,6 +64,9 @@ calculatorButtons.addEventListener('click', (event) => {
         calculator.isWaitingForSecondValue = false;
     }
     if (target.classList.contains('backspace')) {
+        if (calculator.isWaitingForSecondValue) {
+            return; 
+        }
         calculator.displayValue = calculator.displayValue.slice(0, -1) || '0';
     }
     updateDisplay();
