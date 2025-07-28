@@ -71,28 +71,28 @@
     transform: translate(1.5px, 2px);
 }
 
-#zero-btn {
+.btn.zero {
     grid-column: span 3;
     grid-row: 5;
 }
 
-#equals-btn {
+.btn.equals {
     grid-column: 4;
     grid-row: 5;
 }
 
-#decimal-btn {
+.btn.decimal {
     background-color: #F1D9BD;
     color: #ED6F40;
     font-family: "Press Start 2P", system-ui;
     border-bottom: 5px solid #d8c3aa;
 }
 
-#decimal-btn:hover {
+.btn.decimal:hover {
     background-color: #f3e0ca;
 }
 
-#decimal-btn:active {
+.btn.decimal:active {
     transform: translateY(2px);
     border-bottom: 3px solid #d8c3aa;
 }

@@ -1,13 +1,80 @@
-const display = document.querySelector('#display');
-const numberButtons = document.querySelectorAll('.number');
-const operatorButtons = document.querySelectorAll('.operator');
-const clearButton = document.querySelector('#clear-btn');
-const backspaceButton = document.querySelector('#backspace-btn');
-const equalsButton = document.querySelector('#equals-btn');
+const display = document.querySelector('.display');
+const calculatorButtons = document.querySelector('.buttons');
+const calculator ={
+    displayValue: '0',
+    firstValue: null,
+    operator: null,
+    isWaitingForSecondValue: false,
+}
 
-let firstValue = '';
-let operator = '';
-let isWaitingForSecondValue = false;
+function updateDisplay() {
+    display.value = calculator.displayValue;
+}
+
+updateDisplay();
+
+calculatorButtons.addEventListener('click', (event) => {
+    const { target } = event;
+    if (!target.matches('button')) {
+        return;
+    }
+    if (target.classList.contains('number')) {
+        const digit = target.textContent;
+        if (digit === '.') {
+            if (!calculator.displayValue.includes('.')) {
+                calculator.displayValue += '.';
+            } else {
+                if (calculator.displayValue === '0') {
+                    calculator.displayValue = digit;
+                } else {
+                    calculator.displayValue += digit;
+                }
+            }
+            updateDisplay();
+            return;
+        }
+        if (calculator.isWaitingForSecondValue) {
+            calculator.displayValue = digit;
+            calculator.isWaitingForSecondValue = false;
+        } else {
+            if (calculator.displayValue.length >= 16) return;
+            calculator.displayValue = calculator.displayValue === '0' ? digit : calculator.displayValue + digit;
+        }
+    }
+    if (target.classList.contains('operator')) {
+        const { displayValue, firstValue, operator } = calculator;
+        if (firstValue && operator && !calculator.isWaitingForSecondValue) {
+            const result = operate(firstValue, operator, displayValue);
+            calculator.displayValue = result;
+            calculator.firstValue = result;
+        } else {
+            calculator.firstValue = calculator.displayValue;
+        }
+        calculator.operator = target.textContent.trim();
+        calculator.isWaitingForSecondValue = true;
+        console.log('B')
+    }
+    if (target.classList.contains('equals')) {
+        const { displayValue, firstValue, operator } = calculator;
+        if (!firstValue || !operator) return;
+        const result = operate(firstValue, operator, displayValue);
+        calculator.displayValue = result;
+        calculator.firstValue = null;
+        calculator.operator = null;
+        calculator.isWaitingForSecondValue = true;
+    }
+    if (target.classList.contains('all')) {
+        calculator.displayValue = '0';
+        calculator.firstValue = null;
+        calculator.operator = null;
+        calculator.isWaitingForSecondValue = false;
+    }
+    if (target.classList.contains('backspace')) {
+        calculator.displayValue = calculator.displayValue.slice(0, -1) || '0';
+    }
+    updateDisplay();
+    console.log(calculator); 
+});
 
 function operate(first, operator, second) {
     const a = parseFloat(first);
@@ -25,54 +92,3 @@ function operate(first, operator, second) {
             return null;
     }
 }
-
-document.querySelectorAll('.number').forEach(button => {
-    button.addEventListener('click', () => {
-        if (button.textContent === '.' && display.value.includes('.')) {
-            return; 
-        }
-        if (isWaitingForSecondValue) {
-            display.value = button.textContent;
-            isWaitingForSecondValue = false;
-        } else {
-            if (display.value.length >= 16) return;
-            display.value = display.value === '0' ? button.textContent : display.value + button.textContent;
-        }
-    });
-});
-
-document.querySelectorAll('.operator').forEach(button => {
-    button.addEventListener('click', () => {
-        if (firstValue && operator) {
-            const secondValue = display.value;
-            const result = operate(firstValue, operator, secondValue);
-            display.value = result;
-            firstValue = result;
-        } else {
-            firstValue = display.value;
-        }
-        operator = button.textContent.trim();
-        isWaitingForSecondValue = true;
-    });
-});
-
-equalsButton.addEventListener('click', () => {
-    if (!firstValue || !operator) return;
-    const secondValue = display.value;
-    const result = operate(firstValue, operator, secondValue);
-    display.value = result;
-    firstValue = result;
-    operator = '';
-    isWaitingForSecondValue = true;
-});
-
-clearButton.addEventListener('click', () => {
-    display.value = '0';
-    firstValue = '';
-    operator = '';
-    isWaitingForSecondValue = false;
-});
-
-backspaceButton.addEventListener('click', () => {
-    display.value = display.value.slice(0, -1) || '0';
-});
